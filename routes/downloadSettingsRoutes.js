@@ -1,40 +1,40 @@
 const express = require('express');
-const path = require('path');
-const router = express.Router();
+const { GetObjectCommand } = require('@aws-sdk/client-s3');
 const createSettingsFile = require('../logic/endpoints/createSettingsFile');
-const fs = require('fs');
 
-router.get('/downloadSettings', async (req, res) => {
-  const sessionId = req.headers['x-session-id'];
-  const fromTimestamp = req.headers['from-timestamp-index'];
-  const toTimestamp = req.headers['to-timestamp-index'];
-  const forWebuiOrColab = req.headers['for-webui-or-colab']
-  const directoryPath = path.join(__dirname, '..', 'uploads', sessionId);
+module.exports = (s3) => {
+    const router = express.Router();
 
-  await createSettingsFile(fromTimestamp, toTimestamp, forWebuiOrColab, directoryPath, sessionId);
+    router.get('/downloadSettings', async (req, res) => {
+        const sessionId = req.headers['x-session-id'];
+        const fromTimestamp = req.headers['from-timestamp-index'];
+        const toTimestamp = req.headers['to-timestamp-index'];
+        const forWebuiOrColab = req.headers['for-webui-or-colab'];
 
-  let filePath = path.join(directoryPath, 'settings.txt');
+        if (!sessionId) {
+            return res.status(400).json({ message: 'Session ID is missing' });
+        }
 
-  if (fs.existsSync(filePath)) {
-      res.download(filePath, 'settings.txt', (err) => {
-          if (err) {
-              console.error('Error in file download:', err);
-              res.status(500).send('Error in downloading file');
-          } else {
-              setTimeout(() => {
-                  try {
-                      fs.rm(path.join(__dirname, 'uploads', sessionId), { recursive: true, force: true }, (err) => {
-                          if (err) console.error('Error during cleanup:', err);
-                      });
-                  } catch (cleanupError) {
-                      console.error('Error during cleanup:', cleanupError);
-                  }
-              }, 10000);
-          }
-      });
-  } else {
-      res.status(404).send('File not found');
-  }
-});
+        try {
+            const settingsKey = await createSettingsFile(s3, sessionId, fromTimestamp, toTimestamp, forWebuiOrColab);
+            
+            if (settingsKey !== 'failure') {
+                const settingsData = await s3.send(new GetObjectCommand({
+                    Bucket: process.env.AWS_S3_BUCKET,
+                    Key: settingsKey
+                }));
+                
+                res.setHeader('Content-Type', 'text/plain');
+                res.setHeader('Content-Disposition', `attachment; filename=settings.txt`);
+                settingsData.Body.pipe(res);
+            } else {
+                res.status(500).json({ message: 'Settings file creation failed' });
+            }
+        } catch (error) {
+            console.error('Error during settings file download:', error);
+            res.status(500).json({ message: 'Error downloading settings file' });
+        }
+    });
 
-module.exports = router;
+    return router;
+};

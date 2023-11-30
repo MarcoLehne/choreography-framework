@@ -1,26 +1,32 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const { PutObjectCommand } = require('@aws-sdk/client-s3');
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      const sessionId = req.headers['x-session-id']; 
-      const dest = path.join(__dirname, '..') + `/uploads/${sessionId}`;
-      fs.mkdirSync(dest, { recursive: true });
-      cb(null, dest);
-  },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname);
-  }
-});
+const upload = multer({ storage: multer.memoryStorage() });
 
-const upload = multer({ storage: storage });
+module.exports = (s3) => {
+    router.post('/uploadChoreoFile', upload.single('file'), async (req, res) => {
+        const sessionId = req.headers['x-session-id']; 
+        const file = req.file;
 
-router.post('/uploadChoreoFile', upload.single('file'), (req, res) => {
-  console.log(`Received file: ${req.file.originalname} for session: ${req.headers['x-session-id']}`);
-  res.json({ message: "success"});
-});
+        const params = {
+            Bucket: process.env.AWS_S3_BUCKET,
+            Key: `${sessionId}/${file.originalname}`,
+            Body: file.buffer
+        };
 
-module.exports = router;
+        try {
+            const command = new PutObjectCommand(params);
+            const data = await s3.send(command);
+            console.log(`File uploaded successfully.`);
+            await updateDirectoriesJson(s3, sessionId, new Date().toISOString());
+            res.json({ message: "success", location: data.Location });
+        } catch (err) {
+            console.error("Error", err);
+            res.status(500).send('Error uploading file');
+        }
+    });
+
+    return router;
+};
