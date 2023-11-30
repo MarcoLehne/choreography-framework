@@ -1,5 +1,5 @@
-const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
-const streamToString = require('./streamToString');
+const { GetObjectCommand, PutObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+const streamToString = require('../aws/streamToString');
 
 async function updateChoreoFile(s3, sessionId, updateData) {
     const bucketName = process.env.AWS_S3_BUCKET;

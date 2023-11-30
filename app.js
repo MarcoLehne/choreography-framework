@@ -29,7 +29,7 @@ app.use(require('./routes/uploadChoreoFileRoutes')(s3));
 app.use(require('./routes/downloadSettingsRoutes')(s3));
 app.use(require('./routes/downloadChoreoFileRoutes')(s3));
 
-app.use(require('./routes/uploadVideoRoutes')(s3));
+app.use(require('./routes/uploadVideoRoutes'));
 app.use(require('./routes/downloadImageRoutes')(s3));
 app.use(require('./routes/downloadVideoRoutes')(s3));
 
@@ -41,10 +41,6 @@ app.get('*', (req, res) => {
   });
 
 cron.schedule('0 0 * * *', () => {
-    deleteOldDirectories(s3);
-});
-
-cron.schedule('* * * * *', () => {
     deleteOldDirectories(s3);
 });
 

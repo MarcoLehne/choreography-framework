@@ -12,7 +12,7 @@ async function deleteOldDirectories(s3) {
 
         for (const [sessionId, creationDate] of Object.entries(directoriesData)) {
             const creationTime = new Date(creationDate).getTime();
-            if (Date.now() - creationTime > 1) { // 24 hours in milliseconds
+            if (Date.now() - creationTime > 86400000) { // 24 hours in milliseconds
                 // List all objects with the prefix 'sessionId/'
                 const listParams = {
                     Bucket: bucketName,

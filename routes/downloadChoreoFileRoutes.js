@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const { GetObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
 
 module.exports = (s3) => {

@@ -1,5 +1,5 @@
-const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
-const streamToString = require('./streamToString'); // Utility function to convert stream to string
+const { GetObjectCommand, PutObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+const streamToString = require('../aws/streamToString'); // Utility function to convert stream to string
 const processUserInput = require('../util/processUserInput');
 const mergeJson = require('../util/mergeJson');
 

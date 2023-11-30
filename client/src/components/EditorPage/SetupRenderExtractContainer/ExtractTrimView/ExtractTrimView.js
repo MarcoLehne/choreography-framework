@@ -5,15 +5,15 @@ import './ExtractTrimView.css';
 function ExtractTrimView({ sessionId }) {
     const [videoUploaded, setVideoUploaded] = useState(false);
 
-    const handleVideoUploadSuccess = () => {
-        setVideoUploaded(true);
-        downloadExtractedFrame();
-        downloadTrimmedVideo();
+    // const handleVideoUploadSuccess = () => {
+    //     setVideoUploaded(true);
+    //     downloadExtractedFrame();
+    //     downloadTrimmedVideo();
 
-        setTimeout(() => {
-            setVideoUploaded(false);
-        }, 1000);
-    };
+    //     setTimeout(() => {
+    //         setVideoUploaded(false);
+    //     }, 1000);
+    // };
     const downloadTrimmedVideo = () => {
         fetch("/downloadVideo", {
             method: "GET",
@@ -73,13 +73,13 @@ function ExtractTrimView({ sessionId }) {
 
     return (
         <div className="extract-and-trim-container">
-            <h2 className="extract-and-trim-header">Extract</h2>
+            <h2 className="extract-and-trim-header">Extract (disabled) </h2>
             <div className="drag-and-drop-contaner">
             {!videoUploaded ? (
                 <VideoUploadField 
                     fileType=".mp4" 
                     sessionId={sessionId} 
-                    onUploadSuccess={handleVideoUploadSuccess} 
+                    // onUploadSuccess={handleVideoUploadSuccess} 
                 />
             ) : (
                 <p>Video processing...</p>
