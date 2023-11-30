@@ -1,0 +1,15 @@
+.setup-render-extract-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.setup-render-extract-container > * {
+  flex-grow: 1;
+  margin: 0 10px;
+}

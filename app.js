@@ -27,7 +27,6 @@ app.use(require('./routes/updateChoreoFileRoutes'));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './build/index.html'));
   });
-  
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);

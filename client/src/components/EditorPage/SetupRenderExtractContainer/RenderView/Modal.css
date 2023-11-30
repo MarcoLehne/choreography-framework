@@ -1,0 +1,33 @@
+@import '../../../../variables.css';
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: var(--input-field-color);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.modal-button {
+  padding: var(--button-padding);
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.modal-button:hover {
+  background-color: var(--render-button-hover-color);
+}

@@ -1,0 +1,26 @@
+@import '../../../../variables.css';
+
+.extract-and-trim-container {
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  padding: 5px;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  max-width: 450px;
+}
+
+.extract-and-trim-header {
+  font-size: var(--headline-font-size);
+  color: var(--headline-text-color);
+  font-weight: var(--headline-font-weight);
+  margin-bottom: 20px;
+}
+
+.drag-and-drop-container {
+  padding: 20px;
+  text-align: center;
+  border: 2px solid var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+}

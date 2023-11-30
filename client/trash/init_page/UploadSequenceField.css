@@ -1,0 +1,24 @@
+.upload-field {
+  border: 2px dashed #007bff;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease; /* Smooth transition for size change */
+}
+
+/* Scale the upload field on hover or drag over, only when it's not successful */
+.upload-field:not(.successful):hover, 
+.upload-field:not(.successful).dragover {
+  transform: scale(1.05); /* Slightly increase size on hover or drag over */
+}
+
+.upload-field.successful {
+  border-color: green;
+  cursor: default; /* Change cursor to default to indicate no action */
+  pointer-events: none; /* Disable pointer events to prevent any interaction */
+}
+
+/* Optionally, add more styling to indicate the upload field is disabled */
+.upload-field.successful p {
+  color: #28a745; /* Change text color to green to indicate success */
+}

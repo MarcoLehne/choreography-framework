@@ -1,0 +1,164 @@
+@import '../../../../variables.css';
+
+.sequence-compendium-view {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-color);
+  border: var(--input-border);
+  max-width: 600px;
+  min-height: 330px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.sequence-compendium-header {
+  font-size: var(--headline-font-size);
+  color: var(--headline-text-color);
+  margin-bottom: 20px;
+  font-weight: var(--headline-font-weight);
+}
+
+.sequence-compendium-list {
+  min-height: 145px;
+  max-height: 145px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 5px;
+  flex-grow: 1;
+}
+
+.sequence-compendium-list::-webkit-scrollbar, .header-item.scrollbar {
+  min-width: 10px;
+  max-width: 10px;
+}
+
+.sequence-compendium-list::-webkit-scrollbar-track {
+  background: var(--menu-bar-color);
+  border-radius: 10px;
+}
+
+.sequence-compendium-list::-webkit-scrollbar-thumb {
+  background: var(--input-field-color);
+  border-radius: 10px;
+}
+
+.sequence-compendium-header-row, 
+.sequence-compendium-item {
+  display: flex;
+  margin-top:4px;
+}
+
+.header-item,
+.sequence-item {
+  font-size: var(--input-font-size);
+  color: var(--label-text-color);
+  text-align: left;
+}
+
+.header-item {
+  font-weight: var(--headline-font-weight);
+}
+
+.sequence-item {
+  padding-top: 5px;
+}
+
+.header-item.index, .sequence-compendium-index {
+  flex-basis: calc((100% / 9) * 1);
+}
+
+.header-item.name, .sequence-compendium-name {
+  flex-basis: calc((100% / 9) * 4);
+}
+
+.header-item.length, .sequence-compendium-camera-motions {
+  flex-basis: calc((100% / 9) * 2);
+}
+
+.header-item.edit .sequence-edit-button {
+  flex-basis: calc((100% / 9) * 1);
+  text-align: right;
+}
+
+.sequence-compendium-list::-webkit-scrollbar, .header-item.scrollbar {
+  flex-basis: calc((100% / 9) * 1);
+
+}
+
+.sequence-edit-button {
+  background-color: var(--edit-button-color);
+  padding-top:5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.sequence-edit-button:hover {
+  background-color: var(--edit-button-hover-color);
+}
+
+.no-sequences-message {
+  font-size: var(--text-font-size);
+  color: var(--primary-text-color);
+  text-align: center;
+}
+
+.sequence-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sequence-input-textarea {
+  width: 98%;
+  height: 100%;
+  padding: 6px 10px;
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--input-field-color);
+  color: var(--primary-text-color);
+  font-size: var(--input-font-size);
+  resize: none;
+}
+
+.send-delete-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.sequence-input-send-button,
+.sequence-delete-button {
+  padding: var(--button-padding);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.sequence-input-send-button {
+  background-color: var(--add-button-color);
+}
+
+.sequence-input-send-button:hover {
+  background-color: var(--add-button-hover-color);
+}
+
+.sequence-delete-button {
+  background-color: var(--delete-button-color);
+}
+
+.sequence-delete-button:hover {
+  background-color: var(--delete-button-hover-color);
+}
+
+
+

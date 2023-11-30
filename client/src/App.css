@@ -1,0 +1,72 @@
+@import './variables.css';
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: var(--global-font);
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--menu-bar-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+
+.app-title {
+  color: var(--secondary-text-color);
+  font-weight: var(--headline-font-weight);
+  font-size: var(--headline-font-size);
+}
+
+.project-name-display {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--headline-text-color);
+  z-index: 1;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.download-project-button {
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  padding: var(--button-padding);
+  border-radius: var(--border-radius);
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border: none;
+}
+
+
+.download-project-button:hover {
+  background-color: var(--render-button-hover-color);
+}
+
+.app-footer {
+  position: relative;
+  font-size: 12px;
+  color: var(--primary-text-color);
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid var(--input-border);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--menu-bar-color);
+}

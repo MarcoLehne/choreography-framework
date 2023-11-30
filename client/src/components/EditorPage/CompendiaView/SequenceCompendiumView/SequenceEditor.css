@@ -1,0 +1,57 @@
+.sequence-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.sequence-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sequence-editor-textarea {
+  width: 100%;
+  height: 90%;
+  margin-top: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+.save-button {
+  padding: var(--button-padding);
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+  
+}
+
+.save-button:hover {
+  background-color: var(--render-button-hover-color);
+}
+
+.sequence-editor-textarea::-webkit-scrollbar, .header-item.scrollbar {
+  min-width: 10px;
+  max-width: 10px;
+}
+
+.sequence-editor-textarea::-webkit-scrollbar-track {
+  background: var(--menu-bar-color);
+  border-radius: 10px;
+}
+
+.sequence-editor-textarea::-webkit-scrollbar-thumb {
+  background: var(--input-field-color);
+  border-radius: 10px;
+}

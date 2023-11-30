@@ -1,0 +1,67 @@
+@import '../../../variables.css';
+
+.choreo-form-container {
+  padding: 15px;
+  margin: auto;
+  max-width: 600px;
+  background-color: var(--background-color);
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  color: var(--primary-text-color);
+  font-size: var(--text-font-size);
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-field label {
+  margin-right: 10px;
+  flex-basis: 100px;
+  text-align: right;
+  font-size: var(--label-font-size);
+}
+
+.form-field input,
+.form-field select {
+  flex-grow: 1;
+  padding: 6px 10px;
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--input-field-color);
+  color: var(--primary-text-color);
+}
+
+.create-choreo-button {
+  padding: var(--button-padding);
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  width: 100%;
+  font-size: var(--button-font-size);
+}
+
+.create-choreo-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.form-successful {
+  background-color: var(--input-field-occupied-color);
+  border-color: var(--top-gradient-color);
+}
+
+.success-message {
+  text-align: center;
+  padding: 10px;
+  border-radius: var(--border-radius);
+}

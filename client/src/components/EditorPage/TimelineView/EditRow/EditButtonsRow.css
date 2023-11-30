@@ -1,0 +1,25 @@
+@import '../../../../variables.css';
+
+.edit-button {
+  color: var(--secondary-text-color);
+  border-radius: var(--border-radius);
+  font-size: var(--button-font-size);
+  cursor: pointer;
+  border: none;
+}
+
+.add {
+  background-color: var(--add-button-color);  
+}
+
+.add:hover {
+  background-color: var(--add-button-hover-color);  
+}
+
+.delete {
+  background-color: var(--delete-button-color);  
+}
+
+.delete:hover {
+  background-color: var(--delete-button-hover-color);  
+}

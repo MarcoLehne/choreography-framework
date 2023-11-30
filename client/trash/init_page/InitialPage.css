@@ -1,0 +1,14 @@
+.integrated-page {
+  /* Styles for the integrated page */
+}
+
+.form-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+.or-divider {
+  /* Styles for the '- OR -' divider */
+}

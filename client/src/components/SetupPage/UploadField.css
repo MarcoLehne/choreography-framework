@@ -1,0 +1,15 @@
+.upload-field {
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-field.successful {
+  border-color: green;
+  cursor: default;
+  pointer-events: none;
+}
+
+.upload-field.successful p {
+  color: #28a745;
+}

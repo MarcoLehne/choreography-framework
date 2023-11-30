@@ -1,0 +1,37 @@
+:root {
+  --primary-text-color: #B3B3B3;
+  --secondary-text-color: #FFFFFF;
+  --headline-text-color: #E5E5E5;
+  --label-text-color: #C8C8C8;
+
+  --background-color: #121212;
+  --menu-bar-color: #181818;
+  --input-field-color: #202020;
+  --input-field-occupied-color: #2E2E2E;
+  --add-button-color: #3A604A;
+  --add-button-hover-color: #4A795A;
+  --delete-button-color: #603A3A;
+  --delete-button-hover-color: #794A4A;
+  --render-button-color: #3A4860;
+  --render-button-hover-color: #4A5A79;
+  --edit-button-color: #60483A;
+  --edit-button-hover-color: #795A4A;
+
+  --top-gradient-color: #404040;
+  --bottom-gradient-color: #282828;
+
+  --button-padding: 10px 20px;
+  --border-radius: 5px;
+
+  --headline-font-size: 18px;
+  --button-font-size: 16px;
+  --label-font-size: 14px;
+  --text-font-size: 14px;
+  --input-font-size: 16px;
+
+  --headline-font-weight: bold;
+
+  --input-border: 1px solid #383838;
+  
+  --global-font: 'Arial', sans-serif;
+}

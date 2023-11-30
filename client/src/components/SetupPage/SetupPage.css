@@ -1,0 +1,96 @@
+@import '../../variables.css';
+
+.setup-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  font-family: var(--global-font);
+  margin-top:120px;
+}
+
+.options-wrapper {
+  min-width: 800px;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.create-choreo-button-container {
+  max-width:300px;
+  min-width:300px;
+  max-height:150px;
+  min-height:150px;
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--input-field-color);
+}
+
+.upload-choreo-container {
+  flex-basis: 100%;
+  max-width:300px;
+  min-width:300px;
+  max-height:115px;
+  min-height:115px;
+  padding: 20px;
+  border: var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--render-button-color);
+}
+
+.upload-choreo-container:not(.successful):hover, 
+.upload-choreo-container:not(.successful).dragover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.create-choreo-button {
+  max-width:300px;
+  min-width:300px;
+  max-height:150px;
+  min-height:150px;
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.create-choreo-button:hover {
+  background-color: var(--render-button-hover-color);
+}
+
+.go-to-editor-button {
+  padding: var(--button-padding);
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+  margin-top: 20px;
+}
+
+.go-to-editor-button:hover {
+  background-color: var(--render-button-hover-color);
+}
+
+.go-to-editor-button:disabled {
+  background-color: var(--input-field-occupied-color);
+  color: var(--secondary-text-color);
+  cursor: not-allowed;
+}
+
+.upload-success-message {
+  padding: 20px;
+  background-color: var(--top-gradient-color);
+  color: var(--secondary-text-color);
+  border: var(--input-border);
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+}

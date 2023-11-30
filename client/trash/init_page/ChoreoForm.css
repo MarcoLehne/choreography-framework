@@ -1,0 +1,52 @@
+.choreo-form {
+  /* Basic styles for the form */
+  padding: 20px;
+  margin: auto;
+  max-width: 600px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.choreo-form label {
+  /* Styling for labels */
+  display: block;
+  margin-bottom: 10px;
+}
+
+.choreo-form input[type="text"],
+.choreo-form input[type="number"],
+.choreo-form select {
+  /* Styling for input fields and select boxes */
+  width: 100%;
+  padding: 8px 10px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.choreo-form button {
+  /* Styling for the submit button */
+  padding: 10px 15px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.choreo-form button:hover {
+  /* Hover effect for the submit button */
+  background-color: #0056b3;
+}
+
+.choreo-form.form-successful {
+  /* Styles to indicate success */
+  background-color: #d4edda; /* Light green background */
+  border-color: #c3e6cb; /* Green border */
+}
+
+.choreo-form.form-successful button {
+  /* Style changes for the button on successful creation */
+  background-color: #28a745; /* Darker green */
+}

@@ -1,0 +1,26 @@
+@import '../../../../variables.css';
+
+.video-upload-field {
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  background-color: var(--render-button-color);
+  border-radius: var(--border-radius);
+  color: var(--primary-text-color);
+}
+
+.video-upload-field:hover,
+.video-upload-field.dragover {
+  transform: scale(1.05);
+}
+
+.video-upload-field.uploading {
+  cursor: wait;
+  background-color: var(--input-field-occupied-color);
+}
+
+.video-upload-field p {
+  color: var(--primary-text-color);
+}
