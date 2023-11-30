@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choreography Framework for Stable Diffusion's Deforum v0.1 alpha</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <h1>Choreography Framework for Stable Diffusion's Deforum v0.1 alpha</h1>
+    
+    <div class="file-upload-section">
+        <div id="drop-area-1" class="drop-area">
+            <div class="drop-area-title">config.json</div>
+            <input type="file" id="file-input-1" hidden>
+            Drop file here or <button onclick="document.getElementById('file-input-1').click()" id="upload-button-1">Upload</button>
+        </div>
+        <div id="drop-area-2" class="drop-area">
+            <div class="drop-area-title">prompts.json</div>
+            <input type="file" id="file-input-2" hidden>
+            Drop file here or <button onclick="document.getElementById('file-input-2').click()" id="upload-button-2">Upload</button>
+        </div>
+        <div id="drop-area-3" class="drop-area">
+            <div class="drop-area-title">sequence_progression.json</div>
+            <input type="file" id="file-input-3" hidden>
+            Drop file here or <button onclick="document.getElementById('file-input-3').click()" id="upload-button-3">Upload</button>
+        </div>
+        <div id="drop-area-4" class="drop-area">
+            <div class="drop-area-title">sequence_compendium.json</div>
+            <input type="file" id="file-input-4" hidden>
+            Drop file here or <button onclick="document.getElementById('file-input-4').click()" id="upload-button-4">Upload</button>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="settings-section">
+        <label>Generate from frame</label>
+        <select id="frame-start-select" class="dropdown" disabled>
+            <!-- Options will be dynamically populated -->
+        </select>
+        <div class="info-circle" title="Info">
+            <span>?</span>
+            <span class="tooltip-text">Information about the starting frame.</span>
+        </div>
+        <label>to</label>
+        <select id="frame-end-select" class="dropdown" disabled>
+            <!-- Options will be dynamically populated -->
+        </select>
+        <div class="info-circle" title="Info">
+            <span>?</span>
+            <span class="tooltip-text">Information about the ending frame.</span>
+        </div>
+        <label for="setting-select">for</label>
+        <select id="setting-select" class="dropdown">
+            <option value="webui">webui</option>
+            <option value="colab">colab</option>
+        </select>
+        <button class="create-button settings-btn disabled" id="create-settings-btn" disabled>Create settings.txt</button>
+    </div>
+
+    <div class="processing-section hidden">
+        Your settings.txt file is currently in the making, this might take a moment.
+    </div>
+
+    <div class="download-section hidden">
+        <button id="download-btn">Download settings.txt</button>
+        <p id="refresh-message" class="hidden">Please refresh this page after your download was completed if you want to create a new settings.txt file.</p>
+    </div>
+
+    <div class="credentials">Created by Marco Lehne</div>
+
+    <script src="script.js"></script>   
+</body>
+</html>
