@@ -14,10 +14,13 @@ function RenderView({ view, setup, sequenceCompendium, promptsCompendium, saveAn
   const [modal, setModal] = useState("");
 
   const handleSettingsDownloadClick = async () => {
+    
+    let fromTimestampIndexInt = Number(fromTimestampIndex);
+    let toTimestampIndexInt = Number(toTimestampIndex);
 
-    let errorString = isTimestampsOk(fromTimestampIndex, toTimestampIndex, view);
-    errorString += isSequenceOk(fromTimestampIndex, toTimestampIndex, view, sequenceCompendium);
-    errorString += isPromptsOk(fromTimestampIndex, toTimestampIndex, view, promptsCompendium);
+    let errorString = isTimestampsOk(fromTimestampIndexInt, toTimestampIndexInt, view);
+    errorString += isSequenceOk(fromTimestampIndexInt, toTimestampIndexInt, view, sequenceCompendium);
+    errorString += isPromptsOk(fromTimestampIndexInt, toTimestampIndexInt, view, promptsCompendium);
     
     if (errorString === "") {
       await saveAndRefresh({
@@ -195,7 +198,7 @@ function isSequenceOk(fromTimestampIndex, toTimestampIndex, view, sequenceCompen
     }
   }
 
-  if (sequenceCoverage < toTimestampIndex) {
+  if (sequenceCoverage + fromTimestampIndex < toTimestampIndex) {
     problems += "The specified range is not fully covered by the sequences. \n\n";
   }
 
