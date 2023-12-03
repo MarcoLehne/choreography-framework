@@ -15,9 +15,7 @@ function processUserInput(fromTimestampIndex, toTimestampIndex, choreoObject) {
   toTimestampIndex = Number(toTimestampIndex);
 
   calculateMaxFrames(fromTimestampIndex, toTimestampIndex, choreoObject);
-  // -> creates max_frames property on the choreoObject
-
-  
+    
   convertTimestampsToFrames(choreoObject);
 
   levelTimestampsZoZero(choreoObject, fromTimestampIndex);

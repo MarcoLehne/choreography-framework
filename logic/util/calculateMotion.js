@@ -38,13 +38,14 @@ function unpackAndExtract(timestampsPackages,axis) {
     } else {
       withExtracted[timestamps].peak_value = 0;
     }
-    withExtracted[timestamps].onset_graph = firstActionObject.graph.onset_graph;
-    withExtracted[timestamps].offset_graph = firstActionObject.graph.offset_graph;
-    withExtracted[timestamps].onset_duration = firstActionObject.duration.onset_duration;
-    withExtracted[timestamps].peak_duration = firstActionObject.duration.peak_duration;
+
+    withExtracted[timestamps].onset_graph =     firstActionObject.graph.onset_graph;
+    withExtracted[timestamps].offset_graph =    firstActionObject.graph.offset_graph;
+    withExtracted[timestamps].onset_duration =  firstActionObject.duration.onset_duration;
+    withExtracted[timestamps].peak_duration =   firstActionObject.duration.peak_duration;
     withExtracted[timestamps].offset_duration = firstActionObject.duration.offset_duration;
-    withExtracted[timestamps].onset_anchor = firstActionObject.anchor.onset_anchor[axis.length === 1 ? "2D" : "3D"];
-    withExtracted[timestamps].offset_anchor = firstActionObject.anchor.offset_anchor[axis.length === 1 ? "2D" : "3D"];
+    withExtracted[timestamps].onset_anchor =    firstActionObject.anchor.onset_anchor[axis.length === 1 ? "2D" : "3D"];
+    withExtracted[timestamps].offset_anchor =   firstActionObject.anchor.offset_anchor[axis.length === 1 ? "2D" : "3D"];
     withExtracted[timestamps].onset_anchor_type = typeof firstActionObject.anchor.onset_anchor === 'object'? "absolute" : "relative" ;
     withExtracted[timestamps].offset_anchor_type = typeof firstActionObject.anchor.offset_anchor === 'object'? "absolute" : "relative" ;
     
@@ -115,13 +116,21 @@ function assignOnsetOriginAndOffsetTargetValue(mergedFrameStampPackages) {
   // Process each frame stamp package
   Object.entries(mergedFrameStampPackages).forEach(([key, package], index, array) => {
 
-    let onset_peak_temp = package.peak_value * package.onset_anchor; // We are always doing relative so far!!
-    if(package.peak_value < 0) onset_peak_temp = -onset_peak_temp;
-    package.onset_anchor_value = onset_peak_temp < 0? Math.floor(onset_peak_temp) : Math.ceil(onset_peak_temp);
+    if (package.onset_anchor === undefined) {
+      package.onset_anchor_value = 0;
+    } else {
+      let onset_peak_temp = package.peak_value * package.onset_anchor; // We are always doing relative so far!!
+      if(package.peak_value < 0) onset_peak_temp = -onset_peak_temp;
+      package.onset_anchor_value = onset_peak_temp < 0? Math.floor(onset_peak_temp) : Math.ceil(onset_peak_temp);  
+    }
     
-    let offset_peak_temp = package.peak_value * package.offset_anchor; // We are always doing relative so far!!
-    if(package.peak_value < 0) offset_peak_temp = -offset_peak_temp;
-    package.offset_anchor_value = offset_peak_temp < 0? Math.floor(offset_peak_temp) : Math.ceil(offset_peak_temp);
+    if (package.offset_anchor_value === undefined) {
+      package.offset_anchor_value = 0;
+    } else {
+      let offset_peak_temp = package.peak_value * package.offset_anchor; // We are always doing relative so far!!
+      if(package.peak_value < 0) offset_peak_temp = -offset_peak_temp;
+      package.offset_anchor_value = offset_peak_temp < 0? Math.floor(offset_peak_temp) : Math.ceil(offset_peak_temp);  
+    }
     
 
     // package.onset_anchor_peak_value = package.
@@ -193,8 +202,12 @@ function distributeValues(INPUT) {
     let dataRange = INPUT[rangeKey];
 
     // Determine the counts for onset and offset phases
-    let onsetCount = Object.values(dataRange).filter(obj => obj.function === 'onset_duration').length;
-    let offsetCount = Object.values(dataRange).filter(obj => obj.function === 'offset_duration').length;
+    let onsetCount = Object.values(dataRange).filter(obj => 
+      typeof obj === 'object' && obj !== null && obj.function === 'onset_duration'
+    ).length;
+    let offsetCount = Object.values(dataRange).filter(obj => 
+      typeof obj === 'object' && obj !== null && obj.function === 'offset_duration'
+    ).length;
 
     // Track current indices for onset and offset phases
     let onsetIndex = 0;
