@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SetupPage from './components/SetupPage/SetupPage';
 import EditorPage from './components/EditorPage/EditorPage';
+import MobileWarning from './components/MobileWarning';
 import './App.css';
 
 function App() {
@@ -112,6 +113,8 @@ function App() {
         window.open('https://chat.openai.com/g/g-Upo80DFld-sequence-builder', '_blank');
     }
 
+    const isMobile = window.innerWidth <= 768;
+
     return (
         <div className="app-container">
             <header className="app-header">
@@ -125,27 +128,31 @@ function App() {
                     </div>
                 ) : null}
             </header>
-            {!showEditorPage ? (
-                <SetupPage 
-                    sessionId={sessionId}
-                    refreshEditorPage={refreshEditorPage}
-                />
-            ) : (
-                <EditorPage 
-                    sessionId={sessionId}
-                    choreoData={choreoData}  
-                    view={view}
-                    setup={setup}
-                    setSetup={setSetup}
-                    setView={setView}
-                    promptsCompendium={promptsCompendium}
-                    setPromptsCompendium={setPromptsCompendium}
-                    sequenceCompendium={sequenceCompendium}
-                    setSequenceCompendium={setSequenceCompendium}
-                    refreshEditorPage={refreshEditorPage}
-                    saveAndRefresh={saveAndRefresh}
-                />
-            )}
+
+            {isMobile ? (
+                <MobileWarning />
+            ) : !showEditorPage ? (
+                    <SetupPage 
+                        sessionId={sessionId}
+                        refreshEditorPage={refreshEditorPage}
+                    />
+                ) : (
+                    <EditorPage 
+                        sessionId={sessionId}
+                        choreoData={choreoData}  
+                        view={view}
+                        setup={setup}
+                        setSetup={setSetup}
+                        setView={setView}
+                        promptsCompendium={promptsCompendium}
+                        setPromptsCompendium={setPromptsCompendium}
+                        sequenceCompendium={sequenceCompendium}
+                        setSequenceCompendium={setSequenceCompendium}
+                        refreshEditorPage={refreshEditorPage}
+                        saveAndRefresh={saveAndRefresh}
+                    />
+                )
+            }
             <footer className="app-footer">
                 Developed by Marco Lehne 2023
             </footer>

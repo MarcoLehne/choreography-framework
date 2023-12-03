@@ -1,0 +1,14 @@
+@import '../variables.css';
+
+.mobile-warning {
+  color: var(--secondary-text-color);
+  padding: 20px;
+  margin-top: 60px; /* Adjust based on header height */
+  font-size: var(--text-font-size);
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    text-align: center;
+  }
+}
