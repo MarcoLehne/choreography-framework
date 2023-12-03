@@ -2,6 +2,7 @@ const calculateMaxFrames = require('./calculateMaxFrames');
 const convertTimestampsToFrames = require('./convertTimestampsToFrames');
 const mapPrompts = require('./mapPrompts.js');
 const mapSequenceAndUnwrap = require('./mapSequenceAndUnwrap.js');
+const levelTimestampsZoZero = require('./levelTimestampsToZero.js');
 const cleanUp = require('./cleanUp.js');
 
 function processUserInput(fromTimestampIndex, toTimestampIndex, choreoObject) {
@@ -10,16 +11,20 @@ function processUserInput(fromTimestampIndex, toTimestampIndex, choreoObject) {
   // so that it can be merged with template settings to generate the user's settings file
   // it leaves the actual .choreo file on the server untouched
 
+  fromTimestampIndex = Number(fromTimestampIndex);
+  toTimestampIndex = Number(toTimestampIndex);
+
   calculateMaxFrames(fromTimestampIndex, toTimestampIndex, choreoObject);
   // -> creates max_frames property on the choreoObject
+
   
   convertTimestampsToFrames(choreoObject);
 
+  levelTimestampsZoZero(choreoObject, fromTimestampIndex);
+
   mapPrompts(fromTimestampIndex, toTimestampIndex, choreoObject);
-  // -> creates cond_prompts property on the choreoObject
 
   mapSequenceAndUnwrap(fromTimestampIndex, toTimestampIndex, choreoObject);
-  // -> creates all the animation properties on the choreoObject
 
   cleanUp(choreoObject);
 }

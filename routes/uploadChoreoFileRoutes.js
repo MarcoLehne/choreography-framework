@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const { PutObjectCommand } = require('@aws-sdk/client-s3');
+const updateDirectoriesJson = require('../logic/aws/updateDirectoriesJson');
 const router = express.Router();
 
 const upload = multer({ storage: multer.memoryStorage() });

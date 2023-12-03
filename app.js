@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const sslify = require('express-sslify');
 const cors = require('cors');
 const path = require('path');
 const { S3 } = require('@aws-sdk/client-s3');
@@ -7,6 +8,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cron = require('node-cron');
 const deleteOldDirectories = require('./logic/aws/deleteOldDirectories');
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(sslify.HTTPS({ trustProtoHeader: true }));
+}
 
 const s3 = new S3({
   credentials: {

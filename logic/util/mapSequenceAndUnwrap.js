@@ -23,9 +23,11 @@ function createCameraMotionProgression(fromTimestampIndex, toTimestampIndex, cho
       }
       camera_motion_of_a_sequence = camera_motion_of_a_sequence.flat();
 
-      for (let ii = 0; ii < camera_motion_of_a_sequence.length; ii++) {
+      for (let ii = 0; ii < camera_motion_of_a_sequence.length && i + ii <= toTimestampIndex; ii++) {
+
         choreoObject.camera_motion_progression[choreoObject.view.at(i + ii).timestamp] = camera_motion_of_a_sequence.at(ii);
       }
+      i += camera_motion_of_a_sequence.length; // maybe this needs -1
     }
   }
 }
