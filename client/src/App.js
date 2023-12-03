@@ -113,6 +113,24 @@ function App() {
         window.open('https://chat.openai.com/g/g-Upo80DFld-sequence-builder', '_blank');
     }
 
+    const handleCopyPasteClick = async () => {
+        try {
+            const response = await fetch('/provideCopyPaste');
+            const text = await response.text();
+    
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(text);
+                alert('Instructions copied to clipboard!');
+            } else {
+                console.error('Clipboard not available');
+            }
+        } catch (error) {
+            console.error('Failed to copy:', error);
+        }
+
+    };
+    
+
     const isMobile = window.innerWidth <= 768;
 
     return (
@@ -123,6 +141,7 @@ function App() {
                 
                 {showEditorPage ? (
                     <div className="button-wrapper">
+                        <button className="download-project-button" onClick={handleCopyPasteClick}>copy paste instructions</button>
                         <button className="download-project-button" onClick={handleLinkClick}>Sequence Builder</button>
                         <button className="download-project-button" onClick={handleDownloadClick}>Download</button>
                     </div>

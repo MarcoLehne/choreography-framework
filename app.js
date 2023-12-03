@@ -28,6 +28,8 @@ app.use(express.static(path.join(__dirname, './build')));
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 
+app.use(require('./routes/provideCopyPaste'));
+
 app.use(require('./routes/createChoreoFileRoutes')(s3));
 app.use(require('./routes/uploadChoreoFileRoutes')(s3));
 
