@@ -45,8 +45,24 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
   };
 
 
-  const handleSequenceSave = (updatedSequence) => {
+  const handleSequenceSave = async (updatedSequence) => {
+    try {
+      const updatedSequences = [...sequenceCompendium, updatedSequence];
+
+      setSequenceCompendium(updatedSequences);
+      setSequenceInput('');
+
+      await saveAndRefresh({
+          view,
+          setup,
+          promptsCompendium,
+          sequenceCompendium: updatedSequences
+      });
+      
     closeEditor();
+    } catch (error) {
+        console.error('Invalid JSON format:', error);
+    }
   };
   
   const closeEditor = () => {
