@@ -129,7 +129,10 @@ function App() {
         }
 
     };
-    
+
+    const handleWikiClick = () => {
+        window.open('https://github.com/MarcoLehne/choreography-framework/wiki', '_blank');
+    }
 
     const isMobile = window.innerWidth <= 768;
 
@@ -141,7 +144,9 @@ function App() {
                 
                 {showEditorPage ? (
                     <div className="button-wrapper">
-                        <button className="download-project-button" onClick={handleCopyPasteClick}>copy paste instructions</button>
+
+                        <button className="download-project-button" onClick={handleWikiClick}>Wiki</button>
+                        <button className="download-project-button" onClick={handleCopyPasteClick}>Copy Instructions</button>
                         <button className="download-project-button" onClick={handleLinkClick}>Sequence Builder</button>
                         <button className="download-project-button" onClick={handleDownloadClick}>Download</button>
                     </div>
