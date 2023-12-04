@@ -11,8 +11,14 @@ function calculateMotion(choreoObject, axis) {
 
   process_variable = unpackAndExtract(choreoCopy.camera_motion_progression, axis);
   process_variable = distributeFrames(process_variable);
-  process_variable = assignOnsetOriginAndOffsetTargetValue(process_variable);
+  process_variable = assignOnsetOriginAndOffsetTargetValue(process_variable, axis);
+  
+  if (axis === "x") {
+    console.log(process_variable)
+  }
+
   process_variable = distributeValues(process_variable);
+    
   process_variable = toString(process_variable);
 
   return process_variable;
@@ -111,48 +117,37 @@ function distributeFrames(frameStampPackages) {
 
   return frameStampPackages;
 }
-function assignOnsetOriginAndOffsetTargetValue(mergedFrameStampPackages) {
+function assignOnsetOriginAndOffsetTargetValue(mergedFrameStampPackages, axis) {
 
   // Process each frame stamp package
   Object.entries(mergedFrameStampPackages).forEach(([key, package], index, array) => {
 
-    if (package.onset_anchor === undefined) {
+    if (package.onset_anchor === undefined || package.peak_value === 0) {
       package.onset_anchor_value = 0;
     } else {
-      let onset_peak_temp = package.peak_value * package.onset_anchor; // We are always doing relative so far!!
-      if(package.peak_value < 0) onset_peak_temp = -onset_peak_temp;
-      package.onset_anchor_value = onset_peak_temp < 0? Math.floor(onset_peak_temp) : Math.ceil(onset_peak_temp);  
+      let temp_onset_value = package.onset_anchor * (axis.length === 1 ? MAX_2D : MAX_3D);
+      if (temp_onset_value < 1 && temp_onset_value > 0) {
+        temp_onset_value = Math.ceil(temp_onset_value);
+      } else {
+        temp_onset_value = Math.floor(temp_onset_value);
+      }
+        // temp_onset_value will always be a positive number 
+      package.onset_anchor_value = package.peak_value < 0? - temp_onset_value : temp_onset_value;    
     }
     
-    if (package.offset_anchor_value === undefined) {
+    if (package.offset_anchor === undefined  || package.peak_value === 0) {
       package.offset_anchor_value = 0;
     } else {
-      let offset_peak_temp = package.peak_value * package.offset_anchor; // We are always doing relative so far!!
-      if(package.peak_value < 0) offset_peak_temp = -offset_peak_temp;
-      package.offset_anchor_value = offset_peak_temp < 0? Math.floor(offset_peak_temp) : Math.ceil(offset_peak_temp);  
+      
+      let temp_offset_value = package.offset_anchor * (axis.length === 1 ? MAX_2D : MAX_3D);
+      if (temp_offset_value < 1 && temp_offset_value > 0) {
+        temp_offset_value = Math.ceil(temp_offset_value);
+      } else {
+        temp_offset_value = Math.floor(temp_offset_value);
+      }
+        // temp_offset_value will always be a positive number 
+      package.offset_anchor_value = package.peak_value < 0? - temp_offset_value : temp_offset_value; 
     }
-    
-
-    // package.onset_anchor_peak_value = package.
-    // const isFirstPair = index === 0;
-    // const isLastPair = index === array.length - 1;
-
-    // // these are the ones that globally precede / succeed the whole config object
-    // const precedingPeakValue = isFirstPair ? config.preceding_axis_object[axis] : array[index - 1][1].peak_value;
-    // const succeedingPeakValue = isLastPair ? config.succeeding_axis_object[axis] : array[index + 1][1].peak_value;
-
-    // // Determine origin and target camera values
-    // package.origin_peak_value = isFirstPair ? precedingPeakValue :
-    //   (package.onset_anchor_type === "absolute" ?
-    //     handleObjectValue(precedingPeakValue, "origin", package) :
-    //     handleNumericValue(precedingPeakValue, "origin", package));
-
-    // package.target_peak_value = isLastPair ? succeedingPeakValue :
-    //   (package.offset_anchor_type === "absolute" ?
-    //     handleObjectValue(succeedingPeakValue, "target", package) :
-    //     handleNumericValue(succeedingPeakValue, "target", package));
-
-    // Assign back to the package
     mergedFrameStampPackages[key] = package;
   });
 

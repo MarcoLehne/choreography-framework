@@ -9,9 +9,9 @@ function SetupRenderExtractTrimContainer({choreoData, setWidth, setHeight, setFp
   sequenceCompendium, promptsCompendium, saveAndRefresh}) {
   return (
     <div className="setup-render-extract-container">
-      <ExtractTrimView
+      {/* <ExtractTrimView
         sessionId={sessionId}
-      />
+      /> */}
       <SetupView 
         choreoData={choreoData} 
         setWidth={setWidth} 
