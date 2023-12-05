@@ -1,11 +1,11 @@
 import React from 'react';
 import './SequenceEditor.css';
 
-function SequenceEditor({ sequenceData, onSave, onClose }) {
+function SequenceEditor({ sequenceData, onSave, onClose, index }) {
   const [editedSequence, setEditedSequence] = React.useState(JSON.stringify(sequenceData, null, 2));
 
   const handleSave = () => {
-    onSave(JSON.parse(editedSequence));
+    onSave(index, JSON.parse(editedSequence));
     onClose();
   };
 

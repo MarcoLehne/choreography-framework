@@ -6,8 +6,8 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
   const [sequenceInput, setSequenceInput] = useState('');
   const [editingSequence, setEditingSequence] = useState(null);
 
-  const openSequenceEditor = (sequence) => {
-    setEditingSequence(sequence);
+  const openSequenceEditor = (sequence, index) => {
+    setEditingSequence({ sequence, index });
   };
   
   const handleAddSequence = async () => {
@@ -44,24 +44,23 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
       });
   };
 
-
-  const handleSequenceSave = async (updatedSequence) => {
+  const handleSequenceSave = async (index, updatedSequence) => {
     try {
-      const updatedSequences = [...sequenceCompendium, updatedSequence];
-
+      const updatedSequences = [...sequenceCompendium];
+      updatedSequences[index] = updatedSequence;
+  
       setSequenceCompendium(updatedSequences);
-      setSequenceInput('');
-
+  
       await saveAndRefresh({
-          view,
-          setup,
-          promptsCompendium,
-          sequenceCompendium: updatedSequences
+        view,
+        setup,
+        promptsCompendium,
+        sequenceCompendium: updatedSequences
       });
-      
-    closeEditor();
+  
+      closeEditor();
     } catch (error) {
-        console.error('Invalid JSON format:', error);
+      console.error('Error updating sequence:', error);
     }
   };
   
@@ -86,7 +85,7 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
               <span className="sequence-item sequence-compendium-index">{index}</span>
               <span className="sequence-item sequence-compendium-name">{sequence.name}</span>
               <span className="sequence-item sequence-compendium-camera-motions">{sequence.total_amount_camera_motions}</span>
-              <button className="sequence-item sequence-edit-button" onClick={() => openSequenceEditor(sequence)}>Edit</button>
+              <button className="sequence-item sequence-edit-button" onClick={() => openSequenceEditor(sequence, index)}>Edit</button>
             </div>
           ))
         ) : (
@@ -107,7 +106,8 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
       </div>
       {editingSequence && (
         <SequenceEditor
-          sequenceData={editingSequence}
+          sequenceData={editingSequence.sequence}
+          index={editingSequence.index}
           onSave={handleSequenceSave}
           onClose={closeEditor}
         />
