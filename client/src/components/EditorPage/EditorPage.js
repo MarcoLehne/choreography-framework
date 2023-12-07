@@ -8,8 +8,8 @@ function EditorPage({ choreoData, sessionId, view, setView,
   promptsCompendium, setPromptsCompendium, sequenceCompendium, setSequenceCompendium, 
   saveAndRefresh, setup, setSetup }) {
 
-  const [width, setWidth] = useState(choreoData.width);
-  const [height, setHeight] = useState(choreoData.height)
+  const [W, setW] = useState(choreoData.W);
+  const [H, setH] = useState(choreoData.H)
   const [fps, setFps] = useState(choreoData.fps);
   const [scale, setScale] = useState(choreoData.scale);
   const [steps, setSteps] = useState(choreoData.steps);
@@ -19,8 +19,8 @@ function EditorPage({ choreoData, sessionId, view, setView,
     <div className="timeline-editor">
       <SetupRenderExtractTrimContainer 
         choreoData={choreoData} 
-        setWidth={setWidth} 
-        setHeight={setHeight} 
+        setW={setW} 
+        setH={setH} 
         setFps={setFps} 
         setScale={setScale} 
         setSteps={setSteps} 

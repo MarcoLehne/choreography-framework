@@ -1,3 +1,5 @@
 node_modules/
 .env
 todos.txt
+json-workstation.json
+axis.txt

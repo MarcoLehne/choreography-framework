@@ -1,46 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import './SetupView.css';
 
-function SetupView({ choreoData, setWidth, setHeight, setFps, setScale, setSteps, setSeed, setSetup, setup }) {
+function SetupView({ choreoData, setW, setH, setFps, setScale, setSteps, setSeed, setSetup, setup }) {
   
-  const [width, setLocalWidth] = useState(choreoData.width);
-  const [height, setLocalHeight] = useState(choreoData.height);
+  const [W, setLocalW] = useState(choreoData.W);
+  const [H, setLocalH] = useState(choreoData.H);
   const [fps, setLocalFps] = useState(choreoData.fps);
   const [scale, setLocalScale] = useState(choreoData.scale);
   const [steps, setLocalSteps] = useState(choreoData.steps);
   const [seed, setLocalSeed] = useState(choreoData.seed);
 
   useEffect(() => {
-    setLocalWidth(choreoData.width);
-    setLocalHeight(choreoData.height);
+    setLocalW(choreoData.W);
+    setLocalH(choreoData.H);
     setLocalFps(choreoData.fps);
     setLocalScale(choreoData.scale);
     setLocalSteps(choreoData.steps);
     setLocalSeed(choreoData.seed);
   }, [choreoData]);
 
-  const handleWidthChange = (e) => {
-    const newWidth = parseInt(e.target.value, 10) || 0;
-    setLocalWidth(newWidth);
-    setWidth(newWidth);
+  const handleWChange = (e) => {
+    const newW = parseInt(e.target.value, 10) || 0;
+    setLocalW(newW);
+    setW(newW);
 
     setSetup(prevSetup => {
       return {
         ...prevSetup,
-        width: newWidth
+        W: newW
       };
     });
   };
 
-  const handleHeightChange = (e) => {
-    const newHeight = parseInt(e.target.value, 10) || 0;
-    setLocalHeight(newHeight);
-    setHeight(newHeight);
+  const handleHChange = (e) => {
+    const newH = parseInt(e.target.value, 10) || 0;
+    setLocalH(newH);
+    setH(newH);
 
     setSetup(prevSetup => {
       return {
         ...prevSetup,
-        height: newHeight
+        H: newH
       };
     });
   };
@@ -104,11 +104,11 @@ function SetupView({ choreoData, setWidth, setHeight, setFps, setScale, setSteps
         <div className="setup-row">
           <div className="setup-item">
             <label>Width:</label>
-            <input type="text" value={width} onChange={handleWidthChange} maxLength={6} />
+            <input type="text" value={W} onChange={handleWChange} maxLength={6} />
           </div>
           <div className="setup-item">
             <label>Height:</label>
-            <input type="text" value={height} onChange={handleHeightChange} maxLength={6} />
+            <input type="text" value={H} onChange={handleHChange} maxLength={6} />
           </div>
           <div className="setup-item">
             <label>FPS:</label>

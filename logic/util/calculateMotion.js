@@ -7,16 +7,16 @@ function calculateMotion(choreoObject, axis) {
 
   let choreoCopy = JSON.parse(JSON.stringify(choreoObject));
 
+
   let process_variable;
 
   process_variable = unpackAndExtract(choreoCopy.camera_motion_progression, axis);
+  
+  // if (axis === "3d_y") {
+  //   console.log(process_variable)
+  // }
   process_variable = distributeFrames(process_variable);
   process_variable = assignOnsetOriginAndOffsetTargetValue(process_variable, axis);
-  
-  if (axis === "x") {
-    console.log(process_variable)
-  }
-
   process_variable = distributeValues(process_variable);
     
   process_variable = toString(process_variable);
@@ -36,11 +36,8 @@ function unpackAndExtract(timestampsPackages,axis) {
     const firstActionObject = timestampsPackage[timestamps.split("-")[0]];
     
     if (firstActionObject.axis.hasOwnProperty(axis)) {
-      if (axis.length === 1) {
-        withExtracted[timestamps].peak_value = Math.ceil(firstActionObject.axis[axis] * MAX_2D);
-      } else {
-        withExtracted[timestamps].peak_value = Math.ceil(firstActionObject.axis[axis] * MAX_3D);
-      }
+      let peak_value_raw = firstActionObject.axis[axis] * (axis.length === 1 ? MAX_2D : MAX_3D);
+      withExtracted[timestamps].peak_value = peak_value_raw < 0 ? Math.floor(peak_value_raw) : Math.ceil(peak_value_raw);
     } else {
       withExtracted[timestamps].peak_value = 0;
     }

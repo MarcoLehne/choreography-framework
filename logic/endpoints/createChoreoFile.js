@@ -14,8 +14,8 @@ async function createChoreoFile(s3, sessionId, formData, bucketName) {
 
     formData.sequence_compendium = [];
     formData.prompts = []
-    formData.width = 512;
-    formData.height = 512;
+    formData.W = 512;
+    formData.H = 512;
     formData.fps = 25;
     formData.scale = 20;
     formData.steps = 15;

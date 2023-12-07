@@ -4,7 +4,7 @@ import SetupView from './SetupView/SetupView';
 import RenderView from './RenderView/RenderView';
 import './SetupRenderExtractTrimContainer.css';
 
-function SetupRenderExtractTrimContainer({choreoData, setWidth, setHeight, setFps, setScale, setSteps, 
+function SetupRenderExtractTrimContainer({choreoData, setW, setH, setFps, setScale, setSteps, 
   setSeed, view, sessionId, setSetup, setup,
   sequenceCompendium, promptsCompendium, saveAndRefresh}) {
   return (
@@ -14,8 +14,8 @@ function SetupRenderExtractTrimContainer({choreoData, setWidth, setHeight, setFp
       /> */}
       <SetupView 
         choreoData={choreoData} 
-        setWidth={setWidth} 
-        setHeight={setHeight} 
+        setW={setW} 
+        setH={setH} 
         setFps={setFps} 
         setScale={setScale} 
         setSteps={setSteps} 

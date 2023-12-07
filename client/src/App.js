@@ -40,8 +40,8 @@ function App() {
             setPromptsCompendium(data.prompts);
             setSequenceCompendium(data.sequence_compendium);
             setSetup({
-                "width": data.width, 
-                "height": data.height, 
+                "W": data.W, 
+                "H": data.H, 
                 "fps": data.fps, 
                 "scale": data.scale, 
                 "steps": data.steps, 
