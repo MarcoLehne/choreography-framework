@@ -22,6 +22,10 @@ function SetupRenderExtractTrimContainer({choreoData, setW, setH, setFps, setSca
         setSeed={setSeed}
         setSetup={setSetup}
         setup={setup}
+        saveAndRefresh={saveAndRefresh}
+        sequenceCompendium={sequenceCompendium}
+        promptsCompendium={promptsCompendium}
+        view={view}
       />
       <RenderView 
         view={view}

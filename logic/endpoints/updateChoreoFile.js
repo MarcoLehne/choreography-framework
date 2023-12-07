@@ -29,8 +29,8 @@ async function updateChoreoFile(s3, sessionId, updateData) {
         jsonData.view = counterCheckView(updateData.view, updateData.promptsCompendium, updateData.sequenceCompendium);
         jsonData.prompts = updateData.promptsCompendium;
         jsonData.sequence_compendium = updateData.sequenceCompendium; 
-        jsonData.width = updateData.setup.width;
-        jsonData.height = updateData.setup.height;
+        jsonData.W = updateData.setup.W;
+        jsonData.H = updateData.setup.H;
         jsonData.scale = updateData.setup.scale;
         jsonData.steps = updateData.setup.steps;
         jsonData.fps = updateData.setup.fps;
