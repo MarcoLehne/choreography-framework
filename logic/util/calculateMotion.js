@@ -11,13 +11,12 @@ function calculateMotion(choreoObject, axis) {
   let process_variable;
 
   process_variable = unpackAndExtract(choreoCopy.camera_motion_progression, axis);
-  // if (axis === "3d_y") {
-  //   console.log(process_variable)
-  // }
   process_variable = distributeFrames(process_variable);
   process_variable = assignOnsetOriginAndOffsetTargetValue(process_variable, axis);
   process_variable = distributeValues(process_variable);
-  
+  // if (axis === "3d_y") {
+  //   console.log(process_variable)
+  // }
 
   process_variable = toString(process_variable);
 
@@ -67,7 +66,14 @@ function unpackAndExtract(timestampsPackages,axis) {
     // used as init frame for the next video
     if (currentEntry === totalEntries) {
       withExtracted[timestamps][String(Number(lastUsedKey) + 1)] = {};
+      
+      // make last key one bigger
+      let lastKeyFrom = timestamps.split("-")[0];
+      let lastKeyTo = String(Number(timestamps.split("-")[1]) + 1);
+      withExtracted[lastKeyFrom + "-" + lastKeyTo] = { ...withExtracted[timestamps]};
+      delete withExtracted[timestamps];
     }
+
   }
 
   return withExtracted;
@@ -201,6 +207,7 @@ function interpolateValues(startValue, endValue, steps, graphType, currentIndex)
 }
 
 function distributeValues(INPUT) {
+
   for (let rangeKey in INPUT) {
     let [start, end] = rangeKey.split('-').map(Number);
     let dataRange = INPUT[rangeKey];
