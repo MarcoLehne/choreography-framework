@@ -11,14 +11,14 @@ function calculateMotion(choreoObject, axis) {
   let process_variable;
 
   process_variable = unpackAndExtract(choreoCopy.camera_motion_progression, axis);
-  
   // if (axis === "3d_y") {
   //   console.log(process_variable)
   // }
   process_variable = distributeFrames(process_variable);
   process_variable = assignOnsetOriginAndOffsetTargetValue(process_variable, axis);
   process_variable = distributeValues(process_variable);
-    
+  
+
   process_variable = toString(process_variable);
 
   return process_variable;
@@ -27,8 +27,12 @@ function calculateMotion(choreoObject, axis) {
 function unpackAndExtract(timestampsPackages,axis) {
 
   let withExtracted = {};
+  const totalEntries = Object.keys(timestampsPackages).length;
+  let currentEntry = 0;
 
   for (const [timestamps, timestampsPackage] of Object.entries(timestampsPackages)) {
+
+    currentEntry++;
 
     withExtracted[timestamps] = { ...timestampsPackage };
 
@@ -53,8 +57,16 @@ function unpackAndExtract(timestampsPackages,axis) {
     withExtracted[timestamps].offset_anchor_type = typeof firstActionObject.anchor.offset_anchor === 'object'? "absolute" : "relative" ;
     
     // Delete the extracted properties from each Lifecycle
+    let lastUsedKey;
     for (let key in timestampsPackage) {
+      lastUsedKey = key;
       withExtracted[timestamps][key] = {};
+    }
+
+    // this adds an extra frame to the end of the video that can be extracted (deleted) and 
+    // used as init frame for the next video
+    if (currentEntry === totalEntries) {
+      withExtracted[timestamps][String(Number(lastUsedKey) + 1)] = {};
     }
   }
 
