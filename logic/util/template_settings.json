@@ -141,7 +141,7 @@
   "threshold_schedule": "0: (0.0)",
   "color_coherence": "Match Frame 0 LAB",
   "color_coherence_video_every_N_frames": 1,
-  "color_force_grayscale": false,
+  "color_force_grayscale": true,
   "diffusion_cadence": "1",
   "use_depth_warping": true,
   "midas_weight": 0.3,
