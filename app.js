@@ -47,9 +47,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './build/index.html'));
   });
 
-cron.schedule('0 0 * * *', () => {
-    deleteOldDirectories(s3);
-});
+// cron.schedule('0 0 * * *', () => {
+//     deleteOldDirectories(s3);
+// });
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
