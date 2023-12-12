@@ -19,19 +19,29 @@ function PromptsCompendiumView({ view, sequenceCompendium, promptsCompendium, se
         promptsCompendium: updatedPrompts,
         sequenceCompendium
     });
-};
-
-const handleDeleteLastPrompt = async () => {
-    const updatedPrompts = [...promptsCompendium].slice(0, -1);
-    setPromptsCompendium(updatedPrompts);
-
-    await saveAndRefresh({
-        view,
-        setup,
-        promptsCompendium: updatedPrompts,
-        sequenceCompendium
+  };
+  const handleIndividualPromptDelete = async (index) => {
+    const indexInt = parseInt(index); 
+    const updatedPrompts = promptsCompendium.filter((_, promptIndex) => promptIndex !== indexInt);
+  
+    const updatedView = view.map(item => {
+      if (item.prompt > indexInt + 1) { 
+        return { ...item, prompt: item.prompt - 1 };
+      } else if (item.prompt === indexInt + 1) {
+        return { ...item, prompt: 0 }; 
+      }
+      return item;
     });
-};
+  
+    setPromptsCompendium(updatedPrompts);
+  
+    await saveAndRefresh({
+      view: updatedView,
+      setup,
+      promptsCompendium: updatedPrompts,
+      sequenceCompendium
+    });
+  };
 
 
   return (
@@ -54,6 +64,7 @@ const handleDeleteLastPrompt = async () => {
                 value={prompt}
                 onChange={e => handleTextChange(index, e.target.value)}
               />
+              <button className="prompt-item prompt-delete-button" onClick={() => handleIndividualPromptDelete(index)}>Delete</button>
             </div>
           ))
         ) : (
@@ -63,9 +74,6 @@ const handleDeleteLastPrompt = async () => {
       <div className="add-delete-prompt-button-container">
         <button className="add-prompt-button" onClick={handleAddPrompt}>
           Add Prompt
-        </button>
-        <button className="delete-last-prompt-button" onClick={handleDeleteLastPrompt}>
-          Delete Last
         </button>
       </div>
     </div>

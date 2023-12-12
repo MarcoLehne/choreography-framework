@@ -112,6 +112,26 @@
   font-size: var(--input-font-size);
 }
 
+
+.prompt-delete-button {
+  background-color: var(--delete-button-color);
+  /* padding-top:5px; */
+  min-height: 30px;
+  max-height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.prompt-delete-button:hover {
+  background-color: var(--delete-button-hover-color);
+}
+
+
 .no-prompts-message {
   font-size: var(--text-font-size);
   color: var(--primary-text-color);

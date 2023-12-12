@@ -83,6 +83,11 @@
   text-align: right;
 }
 
+.header-item.delete .sequence-delete-button {
+  flex-basis: calc((100% / 9) * 1);
+  text-align: right;
+}
+
 .sequence-compendium-list::-webkit-scrollbar, .header-item.scrollbar {
   flex-basis: calc((100% / 9) * 1);
 
@@ -90,7 +95,9 @@
 
 .sequence-edit-button {
   background-color: var(--edit-button-color);
-  padding-top:5px;
+  /* padding-top:5px; */
+  min-height: 25px;
+  max-height: 25px;
   padding-left: 20px;
   padding-right: 20px;
   color: var(--secondary-text-color);
@@ -102,6 +109,24 @@
 
 .sequence-edit-button:hover {
   background-color: var(--edit-button-hover-color);
+}
+
+.sequence-delete-button {
+  background-color: var(--delete-button-color);
+  /* padding-top:5px; */
+  min-height: 25px;
+  max-height: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.sequence-delete-button:hover {
+  background-color: var(--delete-button-hover-color);
 }
 
 .no-sequences-message {
@@ -134,8 +159,7 @@
   margin-top: 10px;
 }
 
-.sequence-input-send-button,
-.sequence-delete-button {
+.sequence-input-send-button{
   padding: var(--button-padding);
   color: var(--secondary-text-color);
   border: none;
@@ -151,14 +175,5 @@
 .sequence-input-send-button:hover {
   background-color: var(--add-button-hover-color);
 }
-
-.sequence-delete-button {
-  background-color: var(--delete-button-color);
-}
-
-.sequence-delete-button:hover {
-  background-color: var(--delete-button-hover-color);
-}
-
 
 

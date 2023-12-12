@@ -32,18 +32,29 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
     }
   };
 
-  const handleSequenceDelete = async () => {
-      const updatedSequences = [...sequenceCompendium].slice(0, -1);
-      setSequenceCompendium(updatedSequences);
-
-      await saveAndRefresh({
-          view,
-          setup,
-          promptsCompendium,
-          sequenceCompendium: updatedSequences
-      });
+  const handleIndividualDelete = async (index) => {
+    const indexInt = parseInt(index);
+    const updatedSequences = sequenceCompendium.filter((_, seqIndex) => seqIndex !== indexInt);
+  
+    const updatedView = view.map(item => {
+      if (item.sequence > indexInt + 1) { 
+        return { ...item, sequence: item.sequence - 1 };
+      } else if (item.sequence === indexInt + 1) {
+        return { ...item, sequence: 0 }; 
+      }
+      return item;
+    });
+  
+    setSequenceCompendium(updatedSequences);
+  
+    await saveAndRefresh({
+      view: updatedView,
+      setup,
+      promptsCompendium,
+      sequenceCompendium: updatedSequences
+    });
   };
-
+  
   const handleSequenceSave = async (index, updatedSequence) => {
     try {
       const updatedSequences = [...sequenceCompendium];
@@ -76,6 +87,7 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
         <span className="header-item name">Name</span>
         <span className="header-item length">Length</span>
         <span className="header-item edit"></span>
+        <span className="header-item delete"></span>
         <span className="header-item scrollbar"></span>
       </div>
       <div className="sequence-compendium-list">
@@ -86,6 +98,7 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
               <span className="sequence-item sequence-compendium-name">{sequence.name}</span>
               <span className="sequence-item sequence-compendium-camera-motions">{sequence.total_amount_camera_motions}</span>
               <button className="sequence-item sequence-edit-button" onClick={() => openSequenceEditor(sequence, index)}>Edit</button>
+              <button className="sequence-item sequence-delete-button" onClick={() => handleIndividualDelete(index)}>Delete</button>
             </div>
           ))
         ) : (
@@ -101,7 +114,6 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
         />
         <div className="send-delete-div">
           <button className="sequence-input-send-button" onClick={handleAddSequence}>Add sequence</button>
-          <button className="sequence-delete-button" onClick={handleSequenceDelete}>Delete last</button>
         </div>
       </div>
       {editingSequence && (

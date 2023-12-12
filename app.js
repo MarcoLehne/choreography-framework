@@ -43,9 +43,9 @@ app.use(require('./routes/downloadVideoRoutes')(s3));
 app.use(require('./routes/getChoreoDataRoutes')(s3));
 app.use(require('./routes/updateChoreoFileRoutes')(s3));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/index.html'));
-  });
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, './build/index.html'));
+//   });
 
 // cron.schedule('0 0 * * *', () => {
 //     deleteOldDirectories(s3);
