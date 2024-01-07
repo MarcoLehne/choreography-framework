@@ -4,7 +4,7 @@ function mergeJson(base, updates) {
       if (updates[key] === "") {
         base[key] = "false";
       } else {
-        base.use_unit = true;
+        base.use_init = true;
         base.strength = 1.0;
         base.init_image = updates[key];
       }
