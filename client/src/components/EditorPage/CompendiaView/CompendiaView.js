@@ -8,18 +8,14 @@ function CompendiaView({ promptsCompendium, sequenceCompendium, setPromptsCompen
     <div className="compendia-view expandable-child">
       <PromptsCompendiumView
         view={view}
-        setup={setup}
         saveAndRefresh={saveAndRefresh}
-        sequenceCompendium={sequenceCompendium}
         promptsCompendium={promptsCompendium}
         setPromptsCompendium={setPromptsCompendium}
       />
       <SequenceCompendiumView
         view={view}
-        setup={setup}
         saveAndRefresh={saveAndRefresh}
         sequenceCompendium={sequenceCompendium}
-        promptsCompendium={promptsCompendium}
         setSequenceCompendium={setSequenceCompendium}
       />
     </div>

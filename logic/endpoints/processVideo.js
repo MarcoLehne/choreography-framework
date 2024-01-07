@@ -9,7 +9,6 @@ async function processVideo(filePath) {
   const videoDuration = await getVideoDuration(filePath);
 
   return new Promise((resolve, reject) => {
-    // Extract the last frame and save as JPEG
     ffmpeg(filePath)
       .noAudio()
       .outputOptions('-vf', `select=eq(n\\,${totalFrames - 1})`)
@@ -17,10 +16,9 @@ async function processVideo(filePath) {
       .output(outputImagePath)
       .on('end', () => {
         console.log('Last frame extracted');
-        // Trim the video to exclude the last frame based on duration
         ffmpeg(filePath)
           .noAudio()
-          .outputOptions(`-t ${videoDuration - 0.04}`) // Slightly less than the total duration
+          .outputOptions(`-t ${videoDuration - 0.04}`) 
           .output(outputVideoPath)
           .on('end', () => {
             console.log('Video trimmed');

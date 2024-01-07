@@ -22,7 +22,7 @@
   "seed_iter_N": 1,
   "make_grid": false,
   "grid_rows": 2,
-  "outdir": "/content/drive/MyDrive/AI/StableDiffusion/2023-11/Pirouette4",
+  "outdir": "/content/drive/MyDrive/choreography",
   "use_init": false,
   "strength": 0,
   "strength_0_no_init": true,

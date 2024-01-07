@@ -5,6 +5,7 @@ import MobileWarning from './components/MobileWarning';
 import './App.css';
 
 function App() {
+
     const [sessionId, setSessionId] = useState('');
     const [showEditorPage, setShowEditorPage] = useState(false);
     const [choreoData, setChoreoData] = useState(null);
@@ -45,7 +46,8 @@ function App() {
                 "fps": data.fps, 
                 "scale": data.scale, 
                 "steps": data.steps, 
-                "seed": data.seed
+                "seed": data.seed,
+                "init_image": data.init_image
             });
             setShowEditorPage(true);
         } catch (error) {

@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import SequenceEditor from './SequenceEditor';
+import SequenceCreator from './SequenceCreator';
 import './SequenceCompendiumView.css';
 
-function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, sequenceCompendium, setSequenceCompendium, sessionId, setup}) {
+function SequenceCompendiumView({ saveAndRefresh, view, sequenceCompendium, setSequenceCompendium}) {
   const [sequenceInput, setSequenceInput] = useState('');
   const [editingSequence, setEditingSequence] = useState(null);
+  const [creatingSequence, setCreatingSequence] = useState(null);
 
   const openSequenceEditor = (sequence, index) => {
     setEditingSequence({ sequence, index });
+  };
+
+  const openSequenceCreator = () => {
+    setCreatingSequence({ });
   };
   
   const handleAddSequence = async () => {
@@ -20,9 +26,6 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
             setSequenceInput('');
 
             await saveAndRefresh({
-                view,
-                setup,
-                promptsCompendium,
                 sequenceCompendium: updatedSequences
             });
         } catch (error) {
@@ -49,8 +52,6 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
   
     await saveAndRefresh({
       view: updatedView,
-      setup,
-      promptsCompendium,
       sequenceCompendium: updatedSequences
     });
   };
@@ -63,9 +64,6 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
       setSequenceCompendium(updatedSequences);
   
       await saveAndRefresh({
-        view,
-        setup,
-        promptsCompendium,
         sequenceCompendium: updatedSequences
       });
   
@@ -77,6 +75,10 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
   
   const closeEditor = () => {
     setEditingSequence(null);
+  };
+
+  const closeCreator = () => {
+    setCreatingSequence(null);
   };
 
   return (
@@ -113,6 +115,7 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
           placeholder="Copy paste your sequence here"
         />
         <div className="send-delete-div">
+          <button className="sequence-input-send-button" onClick={() => openSequenceCreator()}>Create sequence</button>
           <button className="sequence-input-send-button" onClick={handleAddSequence}>Add sequence</button>
         </div>
       </div>
@@ -122,6 +125,12 @@ function SequenceCompendiumView({ saveAndRefresh, promptsCompendium, view, seque
           index={editingSequence.index}
           onSave={handleSequenceSave}
           onClose={closeEditor}
+        />
+      )}
+      {creatingSequence && (
+        <SequenceCreator
+          onSave={handleSequenceSave}
+          onClose={closeCreator}
         />
       )}
     </div>

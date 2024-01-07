@@ -1,0 +1,108 @@
+
+.sequence-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  padding: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--global-font);
+}
+
+.sequence-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--headline-text-color);
+  font-size: var(--headline-font-size);
+  font-weight: var(--headline-font-weight);
+}
+
+.copy-button {
+  padding: var(--button-padding);
+  background-color: var(--render-button-color);
+  color: var(--secondary-text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.copy-button:hover {
+  background-color: var(--render-button-hover-color);
+}
+.sequence-editor-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.segment-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.segment-row input, .segment-row select, .delete-button {
+  margin: 0 5px;
+}
+
+.sequence-editor-content > label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sequence-editor-content > label > input {
+  margin-top: 5px;
+}
+.segment-row input, .segment-row select, .globalName {
+  background-color: var(--input-field-color);
+  color: var(--secondary-text-color);
+  border: var(--input-border);
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: var(--border-radius);
+  font-size: var(--input-font-size);
+}
+
+.segment-row input:focus, .segment-row select:focus {
+  background-color: var(--input-field-occupied-color);
+}
+
+.delete-button {
+  background-color: var(--delete-button-color);
+  color: var(--secondary-text-color);
+  padding: var(--button-padding);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+}
+
+.delete-button:hover {
+  background-color: var(--delete-button-hover-color);
+}
+
+.add-button {
+  background-color: var(--add-button-color);
+  color: var(--secondary-text-color);
+  padding: var(--button-padding);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--button-font-size);
+  margin-top: 10px;
+}
+
+.add-button:hover {
+  background-color: var(--add-button-hover-color);
+}

@@ -13,17 +13,16 @@ async function deleteOldDirectories(s3) {
         for (const [sessionId, creationDate] of Object.entries(directoriesData)) {
             const creationTime = new Date(creationDate).getTime();
             if (Date.now() - creationTime > 86400000) { // 24 hours in milliseconds
-                // List all objects with the prefix 'sessionId/'
+
                 const listParams = {
                     Bucket: bucketName,
-                    Prefix: `${sessionId}/` // Assuming the sessionId is the directory name
+                    Prefix: `${sessionId}/`
                 };
     
                 try {
                     const listedObjects = await s3.send(new ListObjectsV2Command(listParams));
                     if (listedObjects.Contents.length === 0) continue;
     
-                    // Prepare a list of objects to delete
                     const objectsToDelete = listedObjects.Contents.map(({ Key }) => ({ Key }));
     
                     if (objectsToDelete.length > 0) {

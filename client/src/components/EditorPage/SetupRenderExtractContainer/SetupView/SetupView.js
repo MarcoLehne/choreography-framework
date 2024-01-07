@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './SetupView.css';
 
-function SetupView({ choreoData, setSetup, sequenceCompendium, promptsCompendium,
-view, saveAndRefresh }) {
+function SetupView({ choreoData, setSetup, saveAndRefresh }) {
 
   const [localSetup, setLocalSetup] = useState({
     W: choreoData.W,
@@ -10,21 +9,19 @@ view, saveAndRefresh }) {
     fps: choreoData.fps,
     scale: choreoData.scale,
     steps: choreoData.steps,
-    seed: choreoData.seed
+    seed: choreoData.seed,
+    init_image: choreoData.init_image
   });
 
   const handleLocalSetupChange = async (property, e) => {
-    const newValue = parseInt(e.target.value, 10) || 0;
-    const updatedSetup = { ...localSetup, [property]: newValue };
+
+    const updatedSetup = { ...localSetup, [property]: e.target.value };
     setLocalSetup(updatedSetup);
     setSetup(updatedSetup);
 
     await saveAndRefresh({
-      view,
-      setup: updatedSetup,
-      promptsCompendium,
-      sequenceCompendium
-  });
+      setup: updatedSetup
+    });
   }
 
   return (
@@ -57,6 +54,10 @@ view, saveAndRefresh }) {
           <div className="setup-item">
             <label>Seed:</label>
             <input type="text" value={localSetup.seed} onChange={(e) => handleLocalSetupChange('seed', e)} maxLength={6} />
+          </div>
+          <div className="setup-item">
+            <label>Init Image:</label>
+            <input type="text" value={localSetup.init_image} onChange={(e) => handleLocalSetupChange('init_image', e)} maxLength={100} />
           </div>
         </div>
       </div>

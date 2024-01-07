@@ -1,7 +1,7 @@
 import React from 'react';
 import './PromptsCompendiumView.css';
 
-function PromptsCompendiumView({ view, sequenceCompendium, promptsCompendium, setPromptsCompendium, saveAndRefresh, setup }) {
+function PromptsCompendiumView({ view, promptsCompendium, setPromptsCompendium, saveAndRefresh}) {
   
   const handleTextChange = (index, newText) => {
     const updatedPrompts = [...promptsCompendium];
@@ -15,9 +15,7 @@ function PromptsCompendiumView({ view, sequenceCompendium, promptsCompendium, se
 
     await saveAndRefresh({
         view,
-        setup,
-        promptsCompendium: updatedPrompts,
-        sequenceCompendium
+        promptsCompendium: updatedPrompts
     });
   };
   const handleIndividualPromptDelete = async (index) => {
@@ -37,9 +35,7 @@ function PromptsCompendiumView({ view, sequenceCompendium, promptsCompendium, se
   
     await saveAndRefresh({
       view: updatedView,
-      setup,
-      promptsCompendium: updatedPrompts,
-      sequenceCompendium
+      promptsCompendium: updatedPrompts
     });
   };
 

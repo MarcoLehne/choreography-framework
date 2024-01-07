@@ -1,7 +1,7 @@
 const { PutObjectCommand } = require('@aws-sdk/client-s3');
 
 async function createChoreoFile(s3, sessionId, formData, bucketName) {
-    // Update formData as per your logic
+
     formData.view = [];
     for (const timestamp of formData.timestamps) {
         formData.view.push({
@@ -20,12 +20,11 @@ async function createChoreoFile(s3, sessionId, formData, bucketName) {
     formData.scale = 20;
     formData.steps = 15;
     formData.seed = 10000;
+    formData.init_image = "";
     
-    // Convert formData to JSON string
     const jsonString = JSON.stringify(formData, null, 2);
     const fileKey = `${sessionId}/${formData.name}.choreo`;
 
-    // Upload JSON string to S3
     try {
         const params = {
             Bucket: bucketName,

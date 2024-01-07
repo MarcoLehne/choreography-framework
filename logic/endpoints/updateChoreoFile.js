@@ -5,20 +5,17 @@ async function updateChoreoFile(s3, sessionId, updateData) {
     const bucketName = process.env.AWS_S3_BUCKET;
 
     try {
-        // List objects with the session ID as a prefix
         const listParams = {
             Bucket: bucketName,
             Prefix: `${sessionId}/`
         };
         const listedObjects = await s3.send(new ListObjectsV2Command(listParams));
 
-        // Find the .choreo file
         const choreoFile = listedObjects.Contents.find(obj => obj.Key.endsWith('.choreo'));
         if (!choreoFile) {
             throw new Error('No .choreo file found');
         }
 
-        // Fetch the .choreo file from S3
         const data = await s3.send(new GetObjectCommand({
             Bucket: bucketName,
             Key: choreoFile.Key
@@ -26,15 +23,21 @@ async function updateChoreoFile(s3, sessionId, updateData) {
         const fileContent = await streamToString(data.Body);
         const jsonData = JSON.parse(fileContent);
 
-        jsonData.view = counterCheckView(updateData.view, updateData.promptsCompendium, updateData.sequenceCompendium);
-        jsonData.prompts = updateData.promptsCompendium;
-        jsonData.sequence_compendium = updateData.sequenceCompendium; 
-        jsonData.W = updateData.setup.W;
-        jsonData.H = updateData.setup.H;
-        jsonData.scale = updateData.setup.scale;
-        jsonData.steps = updateData.setup.steps;
-        jsonData.fps = updateData.setup.fps;
-        jsonData.seed = updateData.setup.seed;
+        if ("view" in updateData && "promptsCompendium" in updateData && "sequenceCompendium" in updateData) {
+          jsonData.view = counterCheckView(updateData.view, updateData.promptsCompendium, updateData.sequenceCompendium);
+        }
+
+        if ("prompts" in updateData) jsonData.prompts = updateData.promptsCompendium;
+        if ("sequenceCompendium" in updateData) jsonData.sequence_compendium = updateData.sequenceCompendium; 
+        if ("setup" in updateData) {
+          jsonData.W = updateData.setup.W;
+          jsonData.H = updateData.setup.H;
+          jsonData.scale = updateData.setup.scale;
+          jsonData.steps = updateData.setup.steps;
+          jsonData.fps = updateData.setup.fps;
+          jsonData.seed = updateData.setup.seed;
+          jsonData.init_image = updateData.setup.init_image;
+        }
     
         await s3.send(new PutObjectCommand({
           Bucket: bucketName,
